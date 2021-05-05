@@ -43,7 +43,6 @@ export default function ShopScreen({ route, navigation }) {
 
         // Getting an internal materials list to edit before we push it in.
         let inmat = materials
-        console.log(inmat)
 
         // Looping through the inmat list.
         for (i = 0; i < inmat.length; i++) {
@@ -53,14 +52,14 @@ export default function ShopScreen({ route, navigation }) {
 
             // The item we pressed can only go down in price. (We sold this item.)
             if (inmat[i].name == pressed) {
-                //Random value that is between 0 and half the items value.
-                let rand = Math.floor(Math.random() * (inmat[i].value/2))
+                //Random value that is between 1 and half the items value.
+                let rand = Math.floor(Math.random() * (inmat[i].value/2-1))+1
                 // Newflux is equal to the old flux - rand.
                 newflux = inmat[i].flux - rand
                 console.log("THING WE PRESSED. Rand is: " + rand + ". Newflux is :" + newflux);
             } else {
-                //Random value that is between 0 and half the items value.
-                let rand = Math.floor(Math.random() * (inmat[i].value/2))
+                //Random value that is between 1 and half the items value.
+                let rand = Math.floor(Math.random() * (inmat[i].value/2-1))+1
                 // Getting 1 or -1 to randomly determine positive or negative.
                 let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                 //Applying the randomly chosen plus or minus to rand.
@@ -82,7 +81,6 @@ export default function ShopScreen({ route, navigation }) {
             //Applying new flux in place of old flux.
             inmat[i].flux = newflux
         }
-        console.log(inmat)
         console.log("----------------------------")
         // And finally set materials.
         setMaterials(inmat);
