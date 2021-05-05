@@ -43,6 +43,7 @@ export default function ShopScreen({ route, navigation }) {
 
         // Getting an internal materials list to edit before we push it in.
         let inmat = materials
+        console.log(inmat)
 
         // Looping through the inmat list.
         for (i = 0; i < inmat.length; i++) {
@@ -81,9 +82,14 @@ export default function ShopScreen({ route, navigation }) {
             //Applying new flux in place of old flux.
             inmat[i].flux = newflux
         }
+        console.log(inmat)
         console.log("----------------------------")
         // And finally set materials.
         setMaterials(inmat);
+    }
+
+    const log = () => {
+        console.log(materials);
     }
 
     _renderItem = ({ item }) => (
@@ -108,6 +114,14 @@ export default function ShopScreen({ route, navigation }) {
                 keyExtractor={(item, index) => index.toString()}
                 extraData={this.state}
             />
+
+            <View style={styles.button}>
+              <Button
+                title="Log"
+                raised="true"
+                onPress={() => log()}
+              />
+            </View>
 
         </View>
     ); // end return
