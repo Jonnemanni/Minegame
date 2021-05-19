@@ -7,10 +7,55 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProgressBar from 'react-native-progress/Bar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const db = SQLite.openDatabase('addressplace.db');
+const db = SQLite.openDatabase('gamedb3.db');
 
 // Screen in which items are added, deleted, and selected.
 export default function FrontScreen({ navigation }) {
+    
+  const matlist = [
+    {
+      id: 1,
+      name: "Copper Ore",
+      amount: 0,
+      value: 5
+    },
+    {
+      id: 2,
+      name: "Balsa Log",
+      amount: 0,
+      value: 5
+    },
+    {
+      id: 3,
+      name: "Copper Bar",
+      amount: 0,
+      value: 10
+    },
+    {
+      id: 4,
+      name: "Balsa Plank",
+      amount: 0,
+      value: 10
+    },
+    {
+      id: 5,
+      name: "Copper Sword",
+      amount: 0,
+      value: 25
+    }
+  ]
+  
+  useEffect(() => {
+    db.transaction(tx => {
+      tx.executeSql('create table if not exists items (id integer primary key not null, name text, amount integer, value integer);');
+    });
+
+    for (let i = 0; i < matlist.length; i++) {
+      db.transaction(tx => {
+        tx.executeSql('insert ignore into items (name, amount, value) values (?, ?, ?);', [matlist[i].name, matlist[i].amount, matlist[i].value]);
+      }, null, console.log("Inserted at number. " + i))
+    };
+  }, []);
 
   const craftlist = {
     name: "Crafting Recipies",
@@ -63,6 +108,20 @@ export default function FrontScreen({ navigation }) {
         item: "Balsa Log"
       }
     ]
+  }
+  
+  let [list, setList] = useState();
+
+  const fetching = () => {
+    db.transaction(tx => {
+      tx.executeSql('select * from items;', [], (_, { rows }) =>
+        setList(rows._array)
+      );
+    });
+  }
+
+  const logging = () => {
+    console.log(list);
   }
 
   return (

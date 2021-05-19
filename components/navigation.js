@@ -7,31 +7,43 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProgressBar from 'react-native-progress/Bar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const db = SQLite.openDatabase('addressplace.db');
-
 // Screen in which items are added, deleted, and selected.
 export default function NavScreen({ route, navigation }) {
+    
+    const materials = [
+      {
+        id: 1,
+        name: "Copper Ore",
+        amount: 10,
+        value: 5
+      },
+      {
+        id: 2,
+        name: "Balsa Log",
+        amount: 0,
+        value: 5
+      },
+      {
+        id: 3,
+        name: "Copper Bar",
+        amount: 0,
+        value: 10
+      },
+      {
+        id: 4,
+        name: "Balsa Plank",
+        amount: 0,
+        value: 10
+      },
+      {
+        id: 5,
+        name: "Copper Sword",
+        amount: 0,
+        value: 25
+      }
+    ]
 
     let params = (route.params);
-
-    const materials = [
-        {
-            name: "Copper Ore",
-            amount: 10
-        },
-        {
-            name: "Balsa Log",
-            amount: 20
-        },
-        {
-            name: "Copper Bar",
-            amount: 10
-        },
-        {
-            name: "Balsa Plank",
-            amount: 0
-        }
-    ]
 
     const statuschecker = (itemats) => {
         if (params.screen == "Crafting") {

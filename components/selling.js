@@ -14,26 +14,22 @@ export default function ShopScreen({ route, navigation }) {
             {
                 name: "Copper Ore",
                 amount: 10,
-                value: 5,
-                flux: 0
+                value: 5
             },
             {
                 name: "Balsa Log",
                 amount: 20,
-                value: 5,
-                flux: 1
+                value: 5
             },
             {
                 name: "Copper Bar",
                 amount: 10,
-                value: 10,
-                flux: -5
+                value: 10
             },
             {
                 name: "Balsa Plank",
                 amount: 0,
-                value: 10,
-                flux: 5
+                value: 10
             }
         ]
     );
@@ -83,7 +79,8 @@ export default function ShopScreen({ route, navigation }) {
         }
         console.log("----------------------------")
         // And finally set materials.
-        setMaterials(inmat);
+        console.log(inmat);
+        setMaterials(inmat)
     }
 
     const log = () => {
@@ -94,7 +91,7 @@ export default function ShopScreen({ route, navigation }) {
         <ListItem bottomDivider onPress={() => prizerandomizer(item.name)}>
             <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
-                <ListItem.Subtitle>Current price is at {item.value + item.flux}. Modified from original by {item.flux}. </ListItem.Subtitle>
+                <ListItem.Subtitle>Current price is at {item.value}.</ListItem.Subtitle>
             </ListItem.Content>
         </ListItem>
     )
@@ -119,6 +116,8 @@ export default function ShopScreen({ route, navigation }) {
                 raised="true"
                 onPress={() => log()}
               />
+
+              <Button title="press" onPress={() => change()} />
             </View>
 
         </View>
